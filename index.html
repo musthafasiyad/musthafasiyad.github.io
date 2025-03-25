@@ -42,6 +42,11 @@
             100% { text-shadow: 0 0 5px var(--royal-gold); }
         }
 
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         body {
             font-family: 'Manjari', 'AnjaliOldLipi', sans-serif;
             background: var(--marble-bg);
@@ -172,29 +177,51 @@
             margin: 0 auto;
         }
 
-        .gallery img {
-            width: 100%;
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
             border-radius: 15px;
-            border: 5px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s;
             opacity: 0;
             transform: scale(0.9);
-            animation: popIn 0.8s forwards;
-            animation-delay: calc(var(--img-order) * 0.1s);
+            animation: scaleIn 0.8s forwards;
+            animation-delay: calc(var(--img-order) * 0.15s);
         }
 
-        @keyframes popIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s;
         }
 
-        .gallery img:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             z-index: 2;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: all 0.3s;
+            text-align: center;
+            font-family: 'Baloo Chettan 2', cursive;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
         }
 
         footer {
@@ -270,12 +297,30 @@
         <h2 style="text-align: center; color: var(--royal-purple); font-size: 2.5rem; margin-bottom: 2rem; font-family: 'Baloo Chettan 2', cursive; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">രാജകീയ ഫോട്ടോ ഗാലറി</h2>
         
         <div class="gallery">
-            <img src="https://i.imgur.com/JHV6FQO.jpg" alt="പൂച്ച സാർ 1" loading="lazy" style="--img-order: 1;">
-            <img src="https://i.imgur.com/5qY9bBx.jpg" alt="പൂച്ച സാർ 2" loading="lazy" style="--img-order: 2;">
-            <img src="https://i.imgur.com/8KQn3Gf.jpg" alt="പൂച്ച സാർ 3" loading="lazy" style="--img-order: 3;">
-            <img src="https://i.imgur.com/3M7U5Dd.jpg" alt="പൂച്ച സാർ 4" loading="lazy" style="--img-order: 4;">
-            <img src="https://i.imgur.com/9zQvZbX.jpg" alt="പൂച്ച സാർ 5" loading="lazy" style="--img-order: 5;">
-            <img src="https://i.imgur.com/2AZXBdx.jpg" alt="പൂച്ച സാർ 6" loading="lazy" style="--img-order: 6;">
+            <div class="gallery-item" style="--img-order: 1;">
+                <img src="https://images.app.goo.gl/gdenthHNXppVjDZR8" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 1">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 1</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 2;">
+                <img src="https://images.app.goo.gl/kxcCk5NJvyWhkhV56" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 2">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 2</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 3;">
+                <img src="https://images.app.goo.gl/gT5xjkdaxVdxkuBq8" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 3">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 3</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 4;">
+                <img src="https://www.google.co.in/imgres?imgurl=https%3A%2F%2Fmedia.tenor.com%2F80HwAa0Rz-0AAAAe%2Fscared-cat.png&tbnid=BQgH1TBVS1F42M&vet=1&imgrefurl=https%3A%2F%2Ftenor.com%2Fsearch%2Fworried-cat-gifs&docid=m3OL0SCKBVg0cM&w=457&h=498&hl=en-in&source=sh%2Fx%2Fim%2Fm5%2F3&kgs=5c973a45b315b4f6" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 4">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 4</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 5;">
+                <img src="https://images.app.goo.gl/nu4uTo6Kk5XYkr5A8" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 5">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 5</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 6;">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.2AZXBdxYoyNVbmg8npy5BQHaEK%26pid%3DApi&f=1&ipt=926b683587ad4eb428e1784aaaa3b8144aeb2e8b2e8ec747d46de118ce125970&ipo=images" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 6">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 6</div>
+            </div>
         </div>
     </section>
 
@@ -302,7 +347,7 @@
     <script>
         // Additional animations on scroll
         document.addEventListener('DOMContentLoaded', function() {
-            const rules = document.querySelectorAll('.royal-rule');
+            const animateElements = document.querySelectorAll('.royal-rule, .gallery-item');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -312,8 +357,8 @@
                 });
             }, { threshold: 0.1 });
 
-            rules.forEach(rule => {
-                observer.observe(rule);
+            animateElements.forEach(element => {
+                observer.observe(element);
             });
         });
     </script>
