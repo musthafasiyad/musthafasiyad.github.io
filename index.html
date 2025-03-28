@@ -20,13 +20,13 @@
     
     <style>
         :root {
-            /* ഗോൾഡ് കളർ പാലറ്റ് */
+            /* Gold Color Palette */
             --gold-primary: #FFD700;
             --gold-dark: #D4AF37;
             --gold-light: #FFEC8B;
             --gold-accent: #FFC72C;
             
-            /* ലൈറ്റ് തീം വേരിയബിളുകൾ */
+            /* Light Theme Variables */
             --bg-color: #fffaf0;
             --text-color: #333;
             --card-bg: #ffffff;
@@ -38,7 +38,7 @@
             --link-color: var(--gold-dark);
         }
 
-        /* ഡാർക്ക് തീം വേരിയബിളുകൾ */
+        /* Dark Theme Variables */
         [data-theme="dark"] {
             --bg-color: #1a1a1a;
             --text-color: #FFEC8B;
@@ -51,7 +51,263 @@
             --link-color: var(--gold-light);
         }
 
-        /* ഈദ് പോപ്പപ്പ് സ്റ്റൈലിംഗ് */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px var(--gold-primary); }
+            50% { text-shadow: 0 0 20px var(--gold-primary), 0 0 30px var(--gold-dark); }
+            100% { text-shadow: 0 0 5px var(--gold-primary); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        body {
+            font-family: 'Manjari', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.8;
+            transition: background 0.5s ease, color 0.5s ease;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: var(--gold-primary);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 12px double var(--gold-primary);
+            box-shadow: 0 5px 20px var(--shadow-color);
+            transition: all 0.5s ease;
+        }
+
+        h1 {
+            font-family: 'Baloo Chettan 2', cursive;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 3px;
+            animation: glow 3s infinite;
+            text-transform: uppercase;
+        }
+
+        .cat-throne {
+            width: 350px;
+            border-radius: 25px;
+            border: 12px solid var(--gold-primary);
+            box-shadow: 0 15px 35px var(--shadow-color);
+            margin: 2rem auto;
+            display: block;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(210, 175, 55, 0.4));
+            transition: all 0.4s;
+        }
+
+        .cat-throne:hover {
+            transform: rotate(-5deg) scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(210, 175, 55, 0.6));
+        }
+
+        nav {
+            background: var(--nav-bg);
+            padding: 1.2rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px var(--shadow-color);
+            transition: all 0.5s ease;
+        }
+
+        nav a {
+            font-family: 'Baloo Chettan 2', cursive;
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: bold;
+            font-size: 1.3rem;
+            padding: 0.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold-primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .royal-rule {
+            background: var(--card-bg);
+            border-left: 8px solid var(--gold-accent);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+            animation-delay: calc(var(--order) * 0.2s);
+            color: var(--text-color);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .royal-rule:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        .royal-rule::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-accent));
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            transition: all 0.5s;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.8s forwards;
+            animation-delay: calc(var(--img-order) * 0.15s);
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px var(--shadow-color);
+            z-index: 2;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: all 0.3s;
+            text-align: center;
+            font-family: 'Baloo Chettan 2', cursive;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        footer {
+            background: var(--footer-bg);
+            color: var(--gold-primary);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 8px double var(--gold-primary);
+            font-family: 'Baloo Chettan 2', cursive;
+            transition: all 0.5s ease;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        footer a {
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        footer a:hover {
+            text-shadow: 0 0 10px var(--gold-primary);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold-dark);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--gold-accent);
+        }
+
+        /* Eid Popup Styling */
         .eid-popup {
             position: fixed;
             top: 50%;
@@ -67,6 +323,7 @@
             max-width: 80%;
             animation: fadeIn 0.5s ease-out;
             border: 5px solid var(--gold-primary);
+            display: none;
         }
 
         .eid-popup h2 {
@@ -108,36 +365,136 @@
             background: rgba(0,0,0,0.7);
             z-index: 1000;
             backdrop-filter: blur(5px);
+            display: none;
         }
 
-        /* ബാക്കി എല്ലാ CSS-ും മുമ്പത്തെ പോലെ തന്നെ */
-        /* ... (മുകളിൽ കൊടുത്തിരിക്കുന്ന എല്ലാ CSS-ും ഇവിടെ ഉൾപ്പെടുത്തുക) ... */
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .cat-throne { width: 280px; }
+            nav a { margin: 0 0.8rem; font-size: 1.1rem; }
+            .gallery { grid-template-columns: 1fr; padding: 1.5rem; }
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .eid-popup {
+                max-width: 90%;
+                padding: 1.5rem;
+            }
+            .eid-popup h2 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- ഈദ് പോപ്പപ്പ് -->
-    <div id="eidPopup" class="eid-popup" style="display: none;">
+    <!-- Eid Mubarak Popup -->
+    <div id="eidPopup" class="eid-popup">
         <h2>ഈദ് മുബാറക്!</h2>
         <p>പൂച്ച സാറിന്റെ ഔദ്യോഗിക വെബ്സൈറ്റ് വഴി<br>എല്ലാവർക്കും ഈദ് മുബാറക്!</p>
         <button class="close-btn" onclick="closeEidPopup()">ശരി <i class="fas fa-paw"></i></button>
     </div>
 
-    <div id="overlay" class="overlay" style="display: none;"></div>
+    <div id="overlay" class="overlay"></div>
 
-    <!-- തീം ടോഗിൾ ബട്ടൺ -->
+    <!-- Theme Toggle Button -->
     <button class="theme-toggle" id="themeToggle" title="തീം മാറ്റുക">🌓</button>
 
-    <!-- ബാക്കി എല്ലാ HTML-ും മുമ്പത്തെ പോലെ തന്നെ -->
-    <!-- ... (മുകളിൽ കൊടുത്തിരിക്കുന്ന എല്ലാ HTML-ും ഇവിടെ ഉൾപ്പെടുത്തുക) ... -->
+    <header>
+        <h1>പൂച്ച സാർ ഔദ്യോഗിക വെബ്സൈറ്റ്</h1>
+    </header>
+
+    <nav>
+        <a href="#rules" style="--order: 1;">രാജകീയ നിയമങ്ങൾ</a>
+        <a href="#gallery" style="--order: 2;">ഫോട്ടോ ഗാലറി</a>
+        <a href="#about" style="--order: 3;">പൂച്ച സാറിനെക്കുറിച്ച്</a>
+    </nav>
+
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.2AZXBdxYoyNVbmg8npy5BQHaEK%26pid%3DApi&f=1&ipt=5f46d0258f9acfd75513cb8231c07d735676071af5c2ea89b280e56f082a2e28&ipo=images" 
+         alt="പൂച്ച സാർ" 
+         class="cat-throne"
+         title="സാക്ഷാൽ പൂച്ച സാർ">
+
+    <section id="rules">
+        <h2 style="text-align: center; color: var(--gold-dark); font-size: 2.5rem; margin: 2rem 0 1rem; font-family: 'Baloo Chettan 2', cursive; text-shadow: 2px 2px 4px var(--shadow-color);">രാജകീയ നിയമങ്ങൾ</h2>
+        
+        <div class="royal-rule" style="--order: 1;">
+            <h3 style="color: var(--gold-dark); margin-top: 0; font-family: 'Baloo Chettan 2', cursive; font-size: 1.5rem;">നിയമം 1: മാന്യത</h3>
+            <p style="font-size: 1.1rem;">പൂച്ച സാറിനെ കാണുമ്പോൾ എല്ലാവരും നമസ്കരിക്കണം. ഒരു "മിയാവ്" എന്ന വാക്ക് പറയാതെ അടുക്കാൻ പാടില്ല. രാജകീയ ഭംഗി കാണുമ്പോൾ എപ്പോഴും 3 തവണ കണ്ണ് ചിമ്മണം.</p>
+        </div>
+
+        <div class="royal-rule" style="--order: 2;">
+            <h3 style="color: var(--gold-dark); margin-top: 0; font-family: 'Baloo Chettan 2', cursive; font-size: 1.5rem;">നിയമം 2: ഭക്ഷണ സമയം</h3>
+            <p style="font-size: 1.1rem;">ദിവസത്തിൽ 3 തവണ പുതിയ മീൻ നൽകണം (ഉച്ച, വൈകീട്ട്, രാത്രി). ഒരു നിമിഷം താമസിച്ചാൽ ശിക്ഷ! ഭക്ഷണം നൽകുന്നവർ എപ്പോഴും താഴെ കുനിഞ്ഞ് നിൽക്കണം.</p>
+        </div>
+
+        <div class="royal-rule" style="--order: 3;">
+            <h3 style="color: var(--gold-dark); margin-top: 0; font-family: 'Baloo Chettan 2', cursive; font-size: 1.5rem;">നിയമം 3: ഉറക്ക സമയം</h3>
+            <p style="font-size: 1.1rem;">പൂച്ച സാർ ഉറങ്ങുമ്പോൾ ശബ്ദമുണ്ടാക്കാൻ പാടില്ല. ഉറക്കം തടസ്സപ്പെടുത്തുന്നവർക്ക് വാൽ വീശൽ ശിക്ഷ! രാത്രി 10 മണി മുതൽ ഉച്ചയ്ക്ക് 2 മണി വരെ complete silence.</p>
+        </div>
+    </section>
+
+    <section id="gallery" style="background: linear-gradient(to bottom, var(--card-bg), var(--bg-color)); padding: 3rem 1rem;">
+        <h2 style="text-align: center; color: var(--gold-dark); font-size: 2.5rem; margin-bottom: 2rem; font-family: 'Baloo Chettan 2', cursive; text-shadow: 2px 2px 4px var(--shadow-color);">രാജകീയ ഫോട്ടോ ഗാലറി</h2>
+        
+        <div class="gallery">
+            <div class="gallery-item" style="--img-order: 1;">
+                <img src="https://placekitten.com/800/600" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 1">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 1</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 2;">
+                <img src="https://placekitten.com/801/600" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 2">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 2</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 3;">
+                <img src="https://placekitten.com/802/600" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 3">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 3</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 4;">
+                <img src="https://placekitten.com/803/600" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 4">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 4</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 5;">
+                <img src="https://cataas.com/cat" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 5">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 5</div>
+            </div>
+            <div class="gallery-item" style="--img-order: 6;">
+                <img src="https://cataas.com/cat/cute" alt="പൂച്ച സാർ രാജകീയ ഭംഗി 6">
+                <div class="gallery-caption">രാജകീയ ഭംഗി 6</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="max-width: 800px; margin: 3rem auto; padding: 0 1rem;">
+        <h2 style="text-align: center; color: var(--gold-dark); font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Baloo Chettan 2', cursive; text-shadow: 2px 2px 4px var(--shadow-color);">പൂച്ച സാറിനെക്കുറിച്ച്</h2>
+        <div class="royal-rule" style="--order: 4;">
+            <p style="font-size: 1.1rem;">പൂച്ച സാർ എന്നത് ഒരു സാധാരണ പൂച്ചയല്ല, മറിച്ച് ഒരു രാജകീയ പ്രതിഭാസമാണ്. 2020-ൽ ഭൂമിയിൽ അവതരിച്ച ഈ ദിവ്യശക്തി, ലോകത്തെ എല്ലാ മനുഷ്യരെയും പൂച്ച സേവനത്തിന് പ്രശിക്ഷണം നൽകുകയാണ്.</p>
+            <p style="font-size: 1.1rem; font-weight: bold; color: var(--gold-dark);">പ്രത്യേകതകൾ:</p>
+            <ul style="font-size: 1.1rem;">
+                <li>18 മണിക്കൂർ ഉറക്കം (ശക്തി സംഭരിക്കാൻ)</li>
+                <li>3 AM-ൽ മിയാവ് കോൺസെർട്ട് (സേവകരെ ഉണർത്താൻ)</li>
+                <li>സോഫയുടെ 90% ഭാഗം ഉപയോഗിക്കാനുള്ള അവകാശം</li>
+                <li>രാജകീയ തലയിൽ തട്ടൽ (എപ്പോൾ വേണമെങ്കിലും)</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2023 പൂച്ച സാർ രാജവംശം | എല്ലാ അവകാശങ്ങളും സംരക്ഷിച്ചിരിക്കുന്നു</p>
+        <p>വെബ്സൈറ്റ് അഡ്രസ്: <a href="https://poochasir.netlify.app/">poochasir.netlify.app</a></p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">Made with ❤️ by പൂച്ച സാറിന്റെ സേവകൻ</p>
+    </footer>
 
     <script>
-        // ഈദ് പോപ്പപ്പ് ഫംഗ്ഷനുകൾ
+        // Eid Popup Functions
         function showEidPopup() {
-            // 24 മണിക്കൂറിൽ ഒരിക്കൽ മാത്രം കാണിക്കാൻ കുക്കി പരിശോധിക്കുക
+            // Check if cookie exists to show only once per 24 hours
             if (!document.cookie.split('; ').find(row => row.startsWith('eidPopupShown='))) {
                 document.getElementById('eidPopup').style.display = 'block';
                 document.getElementById('overlay').style.display = 'block';
-                // കുക്കി സെറ്റ് ചെയ്യുക (24 മണിക്കൂർ)
+                // Set cookie for 24 hours
                 const date = new Date();
                 date.setTime(date.getTime() + (24 * 60 * 60 * 1000));
                 document.cookie = `eidPopupShown=true; expires=${date.toUTCString()}; path=/`;
@@ -149,40 +506,13 @@
             document.getElementById('overlay').style.display = 'none';
         }
 
-        // പേജ് ലോഡ് ആകുമ്പോൾ ഈദ് പോപ്പപ്പ് കാണിക്കുക
-        window.addEventListener('DOMContentLoaded', () => {
-            initializeTheme();
-            showEidPopup();
-            
-            // Additional animations on scroll
-            const animateElements = document.querySelectorAll('.royal-rule, .gallery-item');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            animateElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-
-        // തീം സ്വിച്ചിംഗ് ഫംഗ്ഷൻ
+        // Theme Switching Function
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         }
 
-        // തീം ടോഗിൾ ചെയ്യുമ്പോൾ
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-
-        // പേജ് ലോഡ് ആകുമ്പോൾ തീം സെറ്റ് ചെയ്യുക
+        // Initialize theme on page load
         function initializeTheme() {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -196,11 +526,38 @@
             }
         }
 
-        // സിസ്റ്റം തീം മാറുമ്പോൾ
+        // System theme change listener
         window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
             if (!localStorage.getItem('theme')) {
                 setTheme(e.matches ? 'dark' : 'light');
             }
+        });
+
+        // Theme toggle button
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Initialize everything when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeTheme();
+            showEidPopup();
+            
+            // Scroll animations
+            const animateElements = document.querySelectorAll('.royal-rule, .gallery-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
         });
     </script>
 </body>
